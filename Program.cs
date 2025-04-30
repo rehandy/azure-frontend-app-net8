@@ -9,7 +9,7 @@ var app = builder.Build();
 
 // !!! === IMPORTANT: REPLACE THE URL BELOW === !!!
 // Use the URL of YOUR backend app (e.g., https://my-unique-backend-app-net8-123.azurewebsites.net/api/data)
-string backendUrl = "https://my-unique-backend-app-net8-123-cybjetfbcfeucka8.eastus-01.azurewebsites.net/api/data";
+string backendUrl = "https://my-unique-apim-net8-789.azure-api.net/backend-net8/data";
 
 // Use HttpRequest parameter to access headers directly (preferred in .NET 7+)
 app.MapGet("/callbackend", async (IHttpClientFactory clientFactory, HttpRequest request) =>
@@ -31,7 +31,7 @@ app.MapGet("/callbackend", async (IHttpClientFactory clientFactory, HttpRequest 
         var response = await client.GetAsync(backendUrl);
         response.EnsureSuccessStatusCode();
         backendResponse = await response.Content.ReadAsStringAsync();
-        return Results.Ok(new { FrontendSays = "Called backend directly! (.NET 8)", BackendSays = backendResponse });
+        return Results.Ok(new { FrontendSays = "Called backend VIA APIM! (.NET 8)", BackendSays = backendResponse });
     }
     catch (Exception ex)
     {
